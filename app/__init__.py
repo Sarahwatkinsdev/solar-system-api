@@ -14,7 +14,7 @@ def create_app(test_config=None):
     db.init_app(app)
     migrate.init_app(app, db)
     
-    from .routes import planet_bp
+    from .routes import planets_bp
     #register the bluebrint
     app.register_blueprint(planet_bp)
     
