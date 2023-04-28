@@ -16,7 +16,20 @@ def handle_planets():
 
     return make_response(f"Planet {new_planet.name} successfully created", 201)
 
-
+@planets_bp.route("", methods=["GET"])
+def read_all_planets():
+    planets_response = []
+    planets = Planet.query.all()
+    for planet in planets:
+        planets_response.append(
+            {
+            "id": planet.id,
+            "name": planet.name,
+            "description": planet.description,
+            "moon_number": planet.moon_number
+            }
+        )
+    return jsonify(planets_response)
 # class Planet:
 #     def __init__(self, id, name, description, moon_number):
 #         self.id = id
@@ -43,7 +56,7 @@ def handle_planets():
     
 #     abort(make_response({"message":f"planet {planet_id} not found"}, 404))
     
-planet_bp = Blueprint("planets", __name__, url_prefix="/planets")
+# planet_bp = Blueprint("planets", __name__, url_prefix="/planets")
 
 # @planet_bp.route("", methods=["GET"])
 # def handle_planets():
