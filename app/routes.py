@@ -10,7 +10,7 @@ def validate_planet(planet_id):
     except:
         abort(make_response({"message":f"planet {planet_id} invalid"}, 400))
 
-    planet = planet.query.get(planet_id)
+    planet = Planet.query.get(planet_id)
 
     if not planet:
         abort(make_response({"message":f"planet {planet_id} not found"}, 404))
