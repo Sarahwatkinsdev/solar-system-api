@@ -31,13 +31,13 @@ def handle_planets():
 
 @planets_bp.route("", methods=["GET"])
 def read_all_planets():
-    color_query = request.args.get("color")
+    description_query = request.args.get("description")
     
-    if color_query:
-        planets = planet.query.filter_by(color=color_query)
+    if description_query:
+        planets = Planet.query.filter_by(description=description_query)
     
     else:
-        planets = planet.query.all()
+        planets = Planet.query.all()
     planets_response = []
 
     for planet in planets:
