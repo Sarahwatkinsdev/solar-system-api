@@ -31,8 +31,15 @@ def handle_planets():
 
 @planets_bp.route("", methods=["GET"])
 def read_all_planets():
+    color_query = request.args.get("color")
+    
+    if color_query:
+        planets = planet.query.filter_by(color=color_query)
+    
+    else:
+        planets = planet.query.all()
     planets_response = []
-    planets = Planet.query.all()
+
     for planet in planets:
         planets_response.append(
             {
@@ -76,6 +83,7 @@ def delete_planet(planet_id):
     db.session.commit()
     
     return make_response(f"planet #{planet.id} successfully deleted")
+
 
 # class Planet:
 #     def __init__(self, id, name, description, moon_number):
